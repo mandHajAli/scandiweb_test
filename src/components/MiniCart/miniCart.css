@@ -18,8 +18,7 @@
 .mini-cart {
   position: absolute;
   background-color: var(--color-white);
-  height: 400px;
-  width: 300px;
+  width: 325px;
   right: 4.5%;
   padding: 8px 16px;
 }

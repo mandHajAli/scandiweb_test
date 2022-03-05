@@ -18,6 +18,7 @@ class MiniCart extends React.Component {
             <span style={{ fontWeight: 700 }}>My bag</span>, 2 items
           </p>
           <MiniCartCard title="Apollo Running Short" price={50} />
+          <MiniCartCard title="Apollo Running Short" price={50} />
         </div>
       </div>
     );
