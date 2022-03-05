@@ -1,1 +1,1 @@
-export const TEST = "test"
+export const OPEN__CLOSE_CART = "openCart";

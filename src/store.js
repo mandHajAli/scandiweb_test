@@ -7,7 +7,9 @@ import reducers from "./reducer";
 const store = createStore(
   reducers,
   {
-    cart: {},
+    cart: {
+      isOpen: false,
+    },
   },
   applyMiddleware(reduxThunk)
 );
