@@ -4,14 +4,6 @@ import reduxThunk from "redux-thunk";
 import reducers from "./reducer";
 // import {getToken, getUser} from "./auth/storage";
 
-const store = createStore(
-  reducers,
-  {
-    cart: {
-      isOpen: false,
-    },
-  },
-  applyMiddleware(reduxThunk)
-);
+const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 export default store;

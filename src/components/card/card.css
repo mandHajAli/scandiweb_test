@@ -1,0 +1,51 @@
+.main-card {
+  /* background-color: yellow; */
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+  transition: box-shadow 0.2s ease;
+}
+
+.main-card__inactive {
+  filter: grayscale(60%);
+  /* z-index: -1; */
+}
+
+.main-card:hover {
+  box-shadow: var(--shadow-card);
+}
+
+.main-card__title {
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.main-card__price {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+}
+
+.main-card__cart {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: -20px;
+  right: 20px;
+  width: 52px;
+  height: 52px;
+  border-radius: 60px;
+  background-color: var(--color-primary);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+.main-card:hover .main-card__cart {
+  opacity: 1;
+}
+

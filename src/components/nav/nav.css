@@ -1,10 +1,15 @@
 .nav {
-  width: 90%;
+  /* width: 90%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav__container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: auto;
-  overflow-x: hidden;
+  width: 100%;
 }
 
 .navigations {
@@ -17,7 +22,7 @@
   text-transform: uppercase;
   font-size: 16px;
   transition: all 0.2s ease;
-  border-bottom: 2px solid transparent;
+  border-bottom: 3px solid transparent;
 }
 
 .active {
@@ -28,10 +33,15 @@
 .nav__item__logo {
   width: 31px;
   height: 30px;
+  margin-right: 70px;
 }
 
 .currency {
   font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .cart {
@@ -39,16 +49,35 @@
   align-items: center;
   gap: 20px;
   font-size: 18px;
+  position: relative;
+}
+
+.number-of-items {
+  font-family: Roboto;
+  width: 20px;
+  height: 20px;
+  background-color: var(--color-black);
+  border-radius: 60px;
+  font-size: 14px;
+  font-weight: 700;
+  position: absolute;
+  right: -10px;
+  color: vaR(--color-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -10px;
 }
 
 @media only screen and (max-width: 600px) {
-  .nav {
+  .nav__container {
     flex-direction: column;
     align-items: center;
     margin-top: 15px;
   }
   .nav__item-logo {
     order: -1;
+    margin-left: 70px;
   }
   .navigations {
     margin-bottom: 20px;

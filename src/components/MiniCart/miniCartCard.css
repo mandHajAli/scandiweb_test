@@ -1,4 +1,4 @@
-.card {
+.mini-cart__card {
   display: flex;
   justify-content: space-between;
   margin-bottom: 44px;
@@ -52,19 +52,23 @@
   cursor: pointer;
 }
 
+.minus:active {
+  border-color: var(--color-danger);
+}
+
 .minus::after {
   content: "";
   position: absolute;
   width: 8px;
   height: 1px;
-  background-color: var(--color-black);
+  background-color: currentColor;
 }
 
 .plus {
-  display: flex;
-  justify-content: center;
+  /* display: flex; */
+  /* justify-content: center; */
   font-size: 14px;
-  align-items: center;
+  /* align-items: center; */
   width: 25px;
   height: 25px;
   border: 1px solid var(--color-black);
@@ -73,6 +77,33 @@
   font-size: 30px;
   font-weight: 300;
   cursor: pointer;
+  position: relative;
+}
+
+.plus::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 1px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: currentColor;
+}
+
+.plus::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 1px;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  background-color: currentColor;
+}
+
+.plus:active {
+  border-color: var(--color-primary);
 }
 
 .count {

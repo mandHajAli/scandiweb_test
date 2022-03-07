@@ -7,7 +7,7 @@ class MiniCartCard extends React.Component {
   render() {
     const { title, price } = this.props;
     return (
-      <div className="card">
+      <div className="mini-cart__card">
         <div className="details">
           <div className="title">{title}</div>
           <div className="price">${Number(price).toFixed(2)}</div>
@@ -18,9 +18,9 @@ class MiniCartCard extends React.Component {
         </div>
         <div className="items">
           <div className="increments">
-              <div className="plus">+</div>
+              <div className="plus" />
               <div className="count">1</div>
-              <div className="minus"></div>
+              <div className="minus" />
           </div>
           <div
             style={{ height: "137px", width: "105px", backgroundColor: "red" }}

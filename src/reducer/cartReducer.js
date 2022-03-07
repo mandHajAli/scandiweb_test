@@ -1,13 +1,13 @@
 import { OPEN__CLOSE_CART } from "../constants";
 
 const initState = {
-    isOpen: true
+  isOpen: false,
 };
 
-export default function userReducer(state = initState, action) {
+export default function cartReducer(state = initState, action) {
   switch (action.type) {
     case OPEN__CLOSE_CART:
-      return {...state, isOpen: action.payload};
+      return { ...state, isOpen: action.payload };
     case "":
       return {
         ...state,
