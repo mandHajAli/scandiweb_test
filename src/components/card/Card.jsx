@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import styles from "./card.css";
 import pic from "./baby.jpg";
@@ -6,7 +7,7 @@ import cartIcon from "../../assets/icons/cart-white.png";
 
 class Card extends React.Component {
   render() {
-    const { title, price, inactive } = this.props;
+    const { title, price, inactive, onCartClick } = this.props;
     return (
       <div className={`main-card ${inactive ? "main-card__inactive" : ""}`}>
         <div
@@ -33,9 +34,14 @@ class Card extends React.Component {
               OUT OF STOCK
             </p>
           )}
-          <div className="main-card__cart" style={inactive? {cursor: 'not-allowed'} : {}}>
+          <Link
+            to={"/product"}
+            onClick={() => !inactive && onCartClick()}
+            className="main-card__cart"
+            style={inactive ? { cursor: "not-allowed" } : {}}
+          >
             <img src={cartIcon} alt="" />
-          </div>
+          </Link>
         </div>
         <p
           className={"main-card__title"}

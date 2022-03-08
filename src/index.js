@@ -2,17 +2,21 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import { ApolloProvider } from "@apollo/client";
 
 import store from "./store";
 import "./index.css";
 import App from "./App";
+import client from "./client";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <ApolloProvider client={client}>
+          <App />
+        </ApolloProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,

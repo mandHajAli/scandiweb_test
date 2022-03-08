@@ -21,14 +21,16 @@ class MiniCart extends React.Component {
           </p>
           <MiniCartCard title="Apollo Running Short" price={50} />
           <MiniCartCard title="Apollo Running Short" price={50} />
+          <MiniCartCard title="Apollo Running Short" price={50} />
+          <MiniCartCard title="Apollo Running Short" price={50} />
           <div className="total__container">
             <p>Total</p>
             <p style={{ fontWeight: 700 }}>$100.00</p>
           </div>
 
           <div className="button__container">
-            <RegularButton title='View bag' />
-            <SuccessButton title='CHECK OUT' />
+            <RegularButton title="View bag" />
+            <SuccessButton title="CHECK OUT" />
           </div>
         </div>
       </div>

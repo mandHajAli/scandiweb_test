@@ -11,7 +11,7 @@ class TheLayout extends React.Component {
   render() {
     const { children, openCloseDropdown } = this.props;
     return (
-      <>
+      <div style={{ position: "relative" }}>
         <MiniCart />
         <div onClick={() => openCloseDropdown(false)} className="main">
           <div onClick={(e) => e.stopPropagation()}>
@@ -27,9 +27,9 @@ class TheLayout extends React.Component {
           {children}
           {/* </div> */}
         </div>
-      </>
+      </div>
     );
   }
 }
 
-export default connect(null, {openCloseDropdown})(TheLayout);
+export default connect(null, { openCloseDropdown })(TheLayout);

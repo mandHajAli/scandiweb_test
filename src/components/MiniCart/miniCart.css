@@ -23,6 +23,12 @@
   right: 4.5%;
   padding: 8px 16px;
   box-shadow: var(--shadow);
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.mini-cart::-webkit-scrollbar {
+  display: none;
 }
 
 .total__container {

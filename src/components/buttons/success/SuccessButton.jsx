@@ -4,8 +4,8 @@ import "./successButton.css";
 
 class SuccessButton extends React.Component {
   render() {
-    const { onPress, title } = this.props;
-    return <button className="btn__success">{title}</button>;
+    const { onPress, title, style } = this.props;
+    return <button className="btn__success" style={style}>{title}</button>;
   }
 }
 

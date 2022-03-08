@@ -8,12 +8,9 @@ class CardList extends React.Component {
     return (
       <div className="card-list__container">
         <h1 className="card-list__head">Category name</h1>
-        <div
-          className="card-list__wrapper"
-        >
+        <div className="card-list__wrapper">
           <Card title="Apollo Running Short" price="$50.00" />
           <Card title="Apollo Running Short" price="$50.00" inactive={true} />
-          <Card title="Apollo Running Short" price="$50.00" />
           <Card title="Apollo Running Short" price="$50.00" />
           <Card title="Apollo Running Short" price="$50.00" />
           <Card title="Apollo Running Short" price="$50.00" />
