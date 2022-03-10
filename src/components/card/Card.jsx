@@ -1,13 +1,48 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 
-import styles from "./card.css";
-import pic from "./baby.jpg";
+import "./card.css";
+// import pic from "./baby.jpg";
 import cartIcon from "../../assets/icons/cart-white.png";
+import SizeButton from "../buttons/sizeButton/SizeButton";
 
 class Card extends React.Component {
+  _renderArrtibutes(attributes) {
+    return (
+      attributes?.length > 0 &&
+      attributes.map((attribute) => {
+        return (
+          <div key={attribute.id} className="attributes">
+            <p className="main-card__price">{attribute.name}</p>
+            <div style={{ display: "flex", gap: "5px" }}>
+              {attribute.items.map((el) => {
+                if (attribute.type === "swatch")
+                  return (
+                    <div
+                      key={el.id}
+                      style={{
+                        backgroundColor: el.value,
+                      }}
+                      className="swatch"
+                    />
+                  );
+                return (
+                  <SizeButton
+                    key={el.id}
+                    notAvailable={false}
+                    size={el.value}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        );
+      })
+    );
+  }
   render() {
-    const { title, price, inactive, onCartClick } = this.props;
+    const { title, price, inactive, img, category, id, attributes } =
+      this.props;
     return (
       <div className={`main-card ${inactive ? "main-card__inactive" : ""}`}>
         <div
@@ -18,7 +53,14 @@ class Card extends React.Component {
             position: "relative",
           }}
         >
-          <img width={"100%"} height={"100%"} src={pic} />
+          <img
+            width={"100%"}
+            height={"100%"}
+            style={{
+              objectFit: "contain",
+            }}
+            src={img}
+          />
           {inactive && (
             <p
               style={{
@@ -35,8 +77,7 @@ class Card extends React.Component {
             </p>
           )}
           <Link
-            to={"/product"}
-            onClick={() => !inactive && onCartClick()}
+            to={`/${category}/product/${id}`}
             className="main-card__cart"
             style={inactive ? { cursor: "not-allowed" } : {}}
           >
@@ -65,11 +106,13 @@ class Card extends React.Component {
               : {}
           }
         >
-          {price}
+          {price.currency.symbol}
+          {price.amount}
         </p>
+        {this._renderArrtibutes(attributes)}
       </div>
     );
   }
 }
 
-export default Card;
+export default memo(Card);

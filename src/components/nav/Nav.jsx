@@ -11,14 +11,24 @@ import "./nav.css";
 import logo from "../../assets/icons/logo.png";
 import cartLogo from "../../assets/icons/cart.png";
 import arrow from "../../assets/icons/arrow.png";
+import client from "../../client";
+import { GET_CATEGORIES } from "../../gql/queries";
+import { NavLink } from "react-router-dom";
 
 class Nav extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      navi: "women",
-      showDropdown: false,
+      categories: [],
     };
+  }
+
+  async componentDidMount() {
+    const { data } = await client.query({
+      query: GET_CATEGORIES,
+    });
+    // console.log(data);
+    this.setState({ categories: data.categories });
   }
 
   onCartClick = () => {
@@ -27,35 +37,24 @@ class Nav extends React.Component {
   };
 
   render() {
-    const { navi } = this.state;
-    const { currency, openCloseDropdown, changeCurrency } = this.props;
+    const { categories } = this.state;
+    const { currency, openCloseDropdown, changeCurrency, cart } = this.props;
 
     return (
       <nav className="nav">
         <div className="nav__container">
           <div className="nav__item">
             <div className="navigations">
-              <a
-                href="#"
-                className={`navigations__item ${navi === "women" && "active"}`}
-                onClick={() => this.setState({ navi: "women" })}
-              >
-                women
-              </a>
-              <a
-                href="#"
-                className={`navigations__item ${navi === "men" && "active"}`}
-                onClick={() => this.setState({ navi: "men" })}
-              >
-                men
-              </a>
-              <a
-                href="#"
-                className={`navigations__item ${navi === "kids" && "active"}`}
-                onClick={() => this.setState({ navi: "kids" })}
-              >
-                kids
-              </a>
+              {categories?.map((category, i) => (
+                <NavLink
+                  className="navigations__item"
+                  // to={`${category.name === "all" ? "/" : "/" + category.name}`}
+                  to={category.name}
+                  key={i}
+                >
+                  {category.name}
+                </NavLink>
+              ))}
             </div>
           </div>
 
@@ -64,7 +63,6 @@ class Nav extends React.Component {
           </div>
 
           <div className="nav__item cart">
-            {/* put dropdown here */}
             <Dropdown
               visible={currency?.isOpen}
               data={currency?.currencies}
@@ -91,9 +89,12 @@ class Nav extends React.Component {
               style={{ cursor: "pointer", position: "relative" }}
               onClick={this.onCartClick}
             >
-              <div className="number-of-items">
-                <p>2</p>
-              </div>
+              {cart.products.length > 0 && (
+                <div className="number-of-items">
+                  <p>{cart.products.length}</p>
+                </div>
+              )}
+
               <img src={cartLogo} alt="Cart" />
             </div>
           </div>

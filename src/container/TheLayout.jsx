@@ -3,11 +3,15 @@ import { connect } from "react-redux";
 
 import MiniCart from "../components/MiniCart/MiniCart";
 import Nav from "../components/nav/Nav";
-import CartPage from "../pages/cart/CartPage";
+import { getCurrencies } from "../actions";
 import { openCloseDropdown } from "../actions";
 import "./layout.css";
 
 class TheLayout extends React.Component {
+  componentDidMount() {
+    const { getCurrencies } = this.props;
+    getCurrencies();
+  }
   render() {
     const { children, openCloseDropdown } = this.props;
     return (
@@ -32,4 +36,4 @@ class TheLayout extends React.Component {
   }
 }
 
-export default connect(null, { openCloseDropdown })(TheLayout);
+export default connect(null, { openCloseDropdown, getCurrencies })(TheLayout);

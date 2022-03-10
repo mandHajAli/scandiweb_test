@@ -1,5 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 import { connect } from "react-redux";
+import { isEqual } from "lodash";
 
 import "./miniCart.css";
 import MiniCartCard from "./MiniCartCard";
@@ -8,30 +9,63 @@ import RegularButton from "../buttons/regular/RegularButton";
 import SuccessButton from "../buttons/success/SuccessButton";
 
 class MiniCart extends React.Component {
+  totalPrice = () => {
+    const { cart, currency } = this.props;
+
+    let res = 0;
+    cart.products.forEach((p) => {
+      const price = p.product.prices?.filter(
+        (el) => el.currency.symbol === currency?.activeCurrency
+      )[0];
+      res += price.amount * p.count;
+    });
+    return res;
+  };
+
   render() {
-    const { cart, openCloseCart } = this.props;
+    const { cart, openCloseCart, currency } = this.props;
     return (
       <div
         className={`container  ${cart?.isOpen ? "show" : ""}`}
         onClick={() => openCloseCart(false)}
       >
         <div className="mini-cart" onClick={(e) => e.stopPropagation()}>
-          <p style={{ marginBottom: "23px", fontWeight: 500 }}>
-            <span style={{ fontWeight: 700 }}>My bag</span>, 2 items
-          </p>
-          <MiniCartCard title="Apollo Running Short" price={50} />
-          <MiniCartCard title="Apollo Running Short" price={50} />
-          <MiniCartCard title="Apollo Running Short" price={50} />
-          <MiniCartCard title="Apollo Running Short" price={50} />
-          <div className="total__container">
-            <p>Total</p>
-            <p style={{ fontWeight: 700 }}>$100.00</p>
-          </div>
+          {cart.products?.length > 0 && (
+            <div>
+              <p style={{ marginBottom: "23px", fontWeight: 500 }}>
+                <span style={{ fontWeight: 700 }}>My bag</span>,{" "}
+                {cart.products.length} items
+              </p>
+              {cart.products.map((product, i) => (
+                <MiniCartCard
+                  key={product.product.id}
+                  id={product.product.id}
+                  i={i}
+                  title={product.product.name}
+                  price={
+                    product.product.prices?.filter(
+                      (el) => el.currency.symbol === currency?.activeCurrency
+                    )[0]
+                  }
+                  attributes={product.product.attributes}
+                  selectedArtibutes={product.artibutes}
+                  img={product.product.gallery[0]}
+                  count={product.count}
+                />
+              ))}
+              <div className="total__container">
+                <p>Total</p>
+                <p style={{ fontWeight: 700 }}>
+                  ${this.totalPrice().toFixed(2)}
+                </p>
+              </div>
 
-          <div className="button__container">
-            <RegularButton title="View bag" />
-            <SuccessButton title="CHECK OUT" />
-          </div>
+              <div className="button__container">
+                <RegularButton title="View bag" />
+                <SuccessButton title="CHECK OUT" />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -41,7 +75,8 @@ class MiniCart extends React.Component {
 const mapStateToProps = (state) => {
   return {
     cart: state.cart,
+    currency: state.currency,
   };
 };
 
-export default connect(mapStateToProps, { openCloseCart })(MiniCart);
+export default connect(mapStateToProps, { openCloseCart })(memo(MiniCart));

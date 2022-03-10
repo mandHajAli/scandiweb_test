@@ -1,5 +1,6 @@
 .card-list__container {
   overflow-x: hidden;
+  padding-bottom: 100px;
 }
 
 .card-list__head {
@@ -7,11 +8,13 @@
   margin-bottom: 103px;
   font-weight: 400;
   z-index: -1;
+  text-transform: capitalize;
 }
 
 .card-list__wrapper {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
   gap: 40px;
 }
 

@@ -6,31 +6,13 @@ class Dropdown extends React.Component {
   render() {
     const { visible, data, onSelect } = this.props;
     return (
-      <div className={`dropdown ${visible ? "dropdown__show" : ""}`}>
-        {data.map((el, i) => (
-          <p key={i} className="dropdown__item" onClick={() => onSelect(el.value)}>
-            {el.label}
-          </p>
+      <ul className={`dropdown ${visible ? "dropdown__show" : ""}`}>
+        {data?.map((el, i) => (
+          <li key={i} className="dropdown__item" onClick={() => onSelect(el.symbol)}>
+            {el.symbol}  {el.label}
+          </li>
         ))}
-        {/* <p
-          className="dropdown__item"
-          onClick={() => this.setState({ showDropdown: false })}
-        >
-          $ USD
-        </p>
-        <p
-          className="dropdown__item"
-          onClick={() => this.setState({ showDropdown: false })}
-        >
-          € EUR
-        </p>
-        <p
-          className="dropdown__item"
-          onClick={() => this.setState({ showDropdown: false })}
-        >
-          ¥ JPY
-        </p> */}
-      </div>
+      </ul>
     );
   }
 }

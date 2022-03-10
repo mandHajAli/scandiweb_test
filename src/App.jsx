@@ -1,28 +1,32 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Route, Routes, Navigate } from "react-router-dom";
 
 import TheLayout from "./container/TheLayout";
 import CartPage from "./pages/cart/CartPage";
-import WomenPage from "./pages/women/WomenPage";
+import AllProductsPage from "./pages/allProducts/allProductsPage";
 import ProductPage from "./pages/product/ProductPage";
+
+import TechPage from "./pages/techPage/TechPage";
+import ClothesPage from "./pages/clothesPage/ClothesPage";
 
 class App extends React.Component {
   render() {
     return (
       <TheLayout>
-        {/* <ProductPage /> */}
         <Routes>
-          <Route exact path="/" element={<WomenPage />} />
+          <Route exact path="/all" element={<AllProductsPage />} />
+          <Route exact path="/all/product/:id" element={<ProductPage />} />
+          <Route exact path="/tech" element={<TechPage />} />
+          <Route exact path="/tech/product/:id" element={<ProductPage />} />
+          <Route exact path="/clothes/product/:id" element={<ProductPage />} />
+          <Route exact path="/clothes" element={<ClothesPage />} />
           <Route exact path="/cart" element={<CartPage />} />
-          <Route exact path="/women" element={<WomenPage />} />
-          <Route exact path="/product" element={<ProductPage />} />
           <Route element={() => <h1>NOT FOUND</h1>} />
-          <Route path="*" element={<Navigate replace to="/women" />} />
+          <Route exact path="/" element={<Navigate replace to="/all" />} />
         </Routes>
       </TheLayout>
     );
   }
 }
 
-export default connect(null, {})(App);
+export default App;
