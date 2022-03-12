@@ -9,8 +9,9 @@
 }
 
 .main-card__inactive {
-  filter: grayscale(60%);
+  filter: grayscale(100%);
   /* z-index: -1; */
+  pointer-events: none;
 }
 
 .main-card:hover {

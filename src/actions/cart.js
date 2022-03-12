@@ -4,6 +4,7 @@ import {
   INCREMENT_COUNT,
   DECREMENT_COUNT,
   CHANGE_ATRIBUTE,
+  REMOVE_PRODUCT,
 } from "../constants";
 
 export const openCloseCart = (isOpen) => async (dispatch) => {
@@ -41,5 +42,12 @@ export const changeArtibutes = (value) => async (dispatch) => {
   dispatch({
     type: CHANGE_ATRIBUTE,
     payload: value,
+  });
+};
+
+export const removeProduct = (id) => async (dispatch) => {
+  dispatch({
+    type: REMOVE_PRODUCT,
+    payload: id,
   });
 };

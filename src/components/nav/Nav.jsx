@@ -13,7 +13,7 @@ import cartLogo from "../../assets/icons/cart.png";
 import arrow from "../../assets/icons/arrow.png";
 import client from "../../client";
 import { GET_CATEGORIES } from "../../gql/queries";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 class Nav extends React.Component {
   constructor(props) {
@@ -59,7 +59,9 @@ class Nav extends React.Component {
           </div>
 
           <div className="nav__item nav__item-logo">
-            <img className="nav__item__logo" src={logo} alt="Logo" />
+            <Link to={'/all'}>
+              <img className="nav__item__logo" src={logo} alt="Logo" />
+            </Link>
           </div>
 
           <div className="nav__item cart">

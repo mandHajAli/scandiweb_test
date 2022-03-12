@@ -4,6 +4,7 @@ import {
   INCREMENT_COUNT,
   DECREMENT_COUNT,
   CHANGE_ATRIBUTE,
+  REMOVE_PRODUCT,
 } from "../constants";
 
 const initState = {
@@ -35,23 +36,6 @@ export default function cartReducer(state = initState, action) {
       state.products[dIndex].count = dCount - 1;
       return { ...state };
 
-    //   const productC = state.products.filter(
-    //     (p) => p.product.id === action.payload.id
-    //   )[0];
-    //   productC.count = 10
-
-    //   // console.log(productC)
-    //   const newDC = state.products.map((p) =>
-    //   p.product.id === action.payload.id ? productC : p
-    // );
-
-    // console.log(newDC)
-
-    //   return {
-    //     ...state,
-    //     products: newDC
-    //   };
-
     case CHANGE_ATRIBUTE:
       const product = state.products.filter(
         (p) => p.product.id === action.payload.productID
@@ -61,8 +45,12 @@ export default function cartReducer(state = initState, action) {
       const newD = state.products.map((p) =>
         p.product.id === action.payload.productID ? product : p
       );
-
       return { ...state, products: newD };
+    case REMOVE_PRODUCT:
+      const newProductList = state.products.filter(
+        (p) => p.product.id !== action.payload
+      );
+      return { ...state, products: newProductList };
     default:
       return state;
   }

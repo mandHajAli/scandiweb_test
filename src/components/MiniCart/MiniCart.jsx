@@ -1,12 +1,12 @@
 import React, { memo } from "react";
 import { connect } from "react-redux";
-import { isEqual } from "lodash";
 
 import "./miniCart.css";
 import MiniCartCard from "./MiniCartCard";
 import { openCloseCart } from "../../actions";
 import RegularButton from "../buttons/regular/RegularButton";
 import SuccessButton from "../buttons/success/SuccessButton";
+import { useNavigate } from "react-router-dom";
 
 class MiniCart extends React.Component {
   totalPrice = () => {
@@ -23,14 +23,14 @@ class MiniCart extends React.Component {
   };
 
   render() {
-    const { cart, openCloseCart, currency } = this.props;
+    const { cart, openCloseCart, currency, navigate } = this.props;
     return (
       <div
         className={`container  ${cart?.isOpen ? "show" : ""}`}
         onClick={() => openCloseCart(false)}
       >
         <div className="mini-cart" onClick={(e) => e.stopPropagation()}>
-          {cart.products?.length > 0 && (
+          {cart.products?.length > 0 ? (
             <div>
               <p style={{ marginBottom: "23px", fontWeight: 500 }}>
                 <span style={{ fontWeight: 700 }}>My bag</span>,{" "}
@@ -61,10 +61,18 @@ class MiniCart extends React.Component {
               </div>
 
               <div className="button__container">
-                <RegularButton title="View bag" />
+                <RegularButton
+                  title="View bag"
+                  onClick={() => {
+                    openCloseCart(false);
+                    navigate("/cart");
+                  }}
+                />
                 <SuccessButton title="CHECK OUT" />
               </div>
             </div>
+          ) : (
+            <h2>Cart is empty</h2>
           )}
         </div>
       </div>
@@ -79,4 +87,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { openCloseCart })(memo(MiniCart));
+export default connect(mapStateToProps, { openCloseCart })(
+  memo((props) => {
+    const navigate = useNavigate();
+
+    return <MiniCart navigate={navigate} {...props} />;
+  })
+);

@@ -53,41 +53,39 @@ class ProductPage extends React.Component {
 
     return (
       attributes?.length > 0 &&
-      attributes.map((attribute) => {
-        return (
-          <div key={attribute.id}>
-            <p className="product-page__text">{attribute.name}</p>
-            <div className="product-page__size-container">
-              {attribute.items.map((el) => {
-                if (attribute.type === "swatch")
-                  return (
-                    <div
-                      onClick={() => this.onAttributeClick(attribute.id, el.id)}
-                      key={el.id}
-                      style={{
-                        backgroundColor: el.value,
-                      }}
-                      className={`swatch ${
-                        selectedArtibutes[attribute.id] === el.id
-                          ? "swatch__active"
-                          : ""
-                      }`}
-                    />
-                  );
+      attributes.map((attribute) => (
+        <div key={attribute.id}>
+          <p className="product-page__text">{attribute.name}</p>
+          <div className="product-page__size-container">
+            {attribute.items.map((el) => {
+              if (attribute.type === "swatch")
                 return (
-                  <SizeButton
-                    active={selectedArtibutes[attribute.id] === el.id}
+                  <div
                     onClick={() => this.onAttributeClick(attribute.id, el.id)}
                     key={el.id}
-                    notAvailable={false}
-                    size={el.value}
+                    style={{
+                      backgroundColor: el.value,
+                    }}
+                    className={`swatch ${
+                      selectedArtibutes[attribute.id] === el.id
+                        ? "swatch__active"
+                        : ""
+                    }`}
                   />
                 );
-              })}
-            </div>
+              return (
+                <SizeButton
+                  active={selectedArtibutes[attribute.id] === el.id}
+                  onClick={() => this.onAttributeClick(attribute.id, el.id)}
+                  key={el.id}
+                  notAvailable={false}
+                  size={el.value}
+                />
+              );
+            })}
           </div>
-        );
-      })
+        </div>
+      ))
     );
   }
 
@@ -113,7 +111,7 @@ class ProductPage extends React.Component {
               key={i}
               onClick={() => this.setState({ activeImg: i })}
               src={img}
-              alt="IMG"
+              alt="products"
               className="product-page__gallery"
             />
           ))}
@@ -122,7 +120,7 @@ class ProductPage extends React.Component {
         <img
           className="product-page__main-pic"
           src={product.gallery && product.gallery[activeImg]}
-          alt="IMAGE"
+          alt="product"
         />
 
         <div className="product-page__details">
@@ -155,11 +153,10 @@ class ProductPage extends React.Component {
             />
           )}
 
-          <p className="product-page__desc">
-            Find stunning women's cocktail dresses and party dresses. Stand out
-            in lace and metallic cocktail dresses and party dresses from all
-            your favorite brands.
-          </p>
+          <div
+            className="product-page__desc"
+            dangerouslySetInnerHTML={{ __html: product.description }}
+          />
         </div>
       </div>
     );

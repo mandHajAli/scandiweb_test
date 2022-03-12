@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 
 import "./miniCartCard.css";
-import { incrementCount, decrementCount, changeArtibutes } from "../../actions";
+import { incrementCount, decrementCount, changeArtibutes, removeProduct } from "../../actions";
 import { connect } from "react-redux";
 
 class MiniCartCard extends React.Component {
@@ -65,10 +65,12 @@ class MiniCartCard extends React.Component {
       id,
       i,
       cart,
+      removeProduct
     } = this.props;
     const count = cart.products[i].count;
     return (
       <div className="mini-cart__card">
+        <div style={{position: 'absolute', right: 0, top: 0, cursor: 'pointer'}} onClick={() => removeProduct(id)}>x</div>
         <div className="details">
           <div className="title">{title}</div>
           <div className="price">
@@ -88,6 +90,7 @@ class MiniCartCard extends React.Component {
           </div>
           <img
             src={img}
+            alt="product"
             style={{ height: "137px", width: "105px", objectFit: "contain" }}
           />
         </div>
@@ -106,4 +109,5 @@ export default connect(mapStateToProps, {
   incrementCount,
   decrementCount,
   changeArtibutes,
+  removeProduct
 })(memo(MiniCartCard));
